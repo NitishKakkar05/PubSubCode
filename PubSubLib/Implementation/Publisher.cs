@@ -8,9 +8,8 @@ namespace PubSubLib
     {
         public Message ProcessMessage(Message message)
         {
-            var msg = message as Message;
-            msg.Content = "Hello " + msg.Content;
-            return msg;
+            message.Content = "Hello " + message.Content;
+            return message;
         }
 
         public void Publish(Message message, PubSubService pubSubService)

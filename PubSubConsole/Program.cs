@@ -27,9 +27,9 @@ namespace PubSubConsole
             Publisher pub = new Publisher();
 
 
-            Subscriber sub01 = new Subscriber();
-            Subscriber sub02 = new Subscriber();
-            Subscriber sub03 = new Subscriber();
+            Subscriber sub01 = new Subscriber("sub01");
+            Subscriber sub02 = new Subscriber("sub02");
+            Subscriber sub03 = new Subscriber("sub03");
 
             sub01.Subscribe(fashionMessage, service);
 
@@ -41,8 +41,8 @@ namespace PubSubConsole
             sub03.Subscribe(movieMessage, service);
 
 
-            pub.ProcessMessage(fashionMessage);
-            pub.Publish(fashionMessage, service);
+            pub.ProcessMessage(movieMessage);
+            pub.Publish(movieMessage, service);
 
             service.BroadCast();
 

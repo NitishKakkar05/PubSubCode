@@ -12,6 +12,7 @@ namespace PubSubLibTest
         Publisher publisher;
         Subscriber subscriber;
         StringWriter output;
+        const string subscriberId = "sub01";
         public PubSubTest()
         {
             output = new StringWriter();
@@ -19,7 +20,7 @@ namespace PubSubLibTest
             service = new PubSubService();
             message = new Message { Content = "Test Message" };
             publisher = new Publisher();
-            subscriber = new Subscriber();
+            subscriber = new Subscriber(subscriberId);
         }
 
         [Fact]
@@ -33,7 +34,7 @@ namespace PubSubLibTest
             service.BroadCast();
 
             // Assert
-            Assert.Equal(message.Content + Environment.NewLine, output.ToString());
+            Assert.Equal(subscriberId + " " + message.Content + Environment.NewLine, output.ToString());
         }
 
         [Fact]
@@ -66,7 +67,8 @@ namespace PubSubLibTest
         {
 
             // Arrange
-            Subscriber subscriber02 = new Subscriber();
+            string subscriberId02 = "sub02";
+            Subscriber subscriber02 = new Subscriber(subscriberId02);
 
             subscriber.Subscribe(message, service);
             subscriber02.Subscribe(message,service);
@@ -76,7 +78,8 @@ namespace PubSubLibTest
             service.BroadCast();
 
             // Assert
-            Assert.Equal(message.Content + Environment.NewLine + message.Content + Environment.NewLine, output.ToString());
+            Assert.Equal(subscriberId + " "  + message.Content + Environment.NewLine +
+                subscriberId02 + " " + message.Content + Environment.NewLine, output.ToString());
         }
 
         [Fact]
@@ -92,7 +95,7 @@ namespace PubSubLibTest
             service.BroadCast();
 
             // Assert
-            Assert.Equal(message.Content + Environment.NewLine, output.ToString());
+            Assert.Equal(subscriberId + " " + message.Content + Environment.NewLine, output.ToString());
         }
 
         [Fact]

@@ -6,9 +6,14 @@ namespace PubSubLib
 {
     public class Subscriber : ISubscriber
     {
+        public string SubscriberId { get; }
+        public Subscriber(string subscriberId)
+        {
+            SubscriberId = subscriberId;
+        }
         public void Display(Message message)
         {
-            message.ShowMessage();
+            message.ShowMessage(SubscriberId);
         }
 
         public void Subscribe(Message message, PubSubService pubSubService)

@@ -13,9 +13,9 @@ namespace PubSubLib
         {
             CreatedTime = DateTime.Now;
         }
-        public void ShowMessage()
+        public void ShowMessage(string prefix)
         {
-            Console.WriteLine(Content);
+            Console.WriteLine(prefix + " " + Content);
         }
     }
 }
